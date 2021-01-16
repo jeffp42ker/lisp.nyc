@@ -1,6 +1,6 @@
 {:site-title                   "My Awesome Blog"
  :author                       "Bob Bobbert"
- :description                  "This blog is awesome"
+ :description                  "This blog is awesome too"
  :site-url                     "https://jeffp42ker.github.io/lisp.nyc/"
  :post-root                    "posts"
  :page-root                    "pages"
