@@ -1,26 +1,91 @@
-version: 2 # use CircleCI 2.0
-jobs: # basic units of work in a run
-  build: # runs not using Workflows must have a `build` job as entry point
-    working_directory: ~/lisp.nyc # directory where steps will run
-    docker: # run the steps with Docker
-      - image: circleci/clojure:lein-2.9.1 # ...with this image as the primary container; this is where all `steps` will run
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    environment: # environment variables for primary container
-      LEIN_ROOT: nbd
-      JVM_OPTS: -Xmx3200m # limit the maximum heap size to prevent out of memory errors
-    steps: # commands that comprise the `build` job
-      - checkout # check out source code to working directory
-      - restore_cache: # restores saved cache if checksum hasn't changed since the last run
-          key: lisp-nyc-{{ checksum "project.clj" }}
+version: 1
+# Adapted from https://github.com/danplisetsky/danplisetsky.github.io/blob/develop/.circleci/config.yml
+jobs:
+  prepare-lein:
+    docker:
+      - image: circleci/clojure:lein-2.9.1
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - restore_cache:
+          key: deps-{{ checksum "project.clj" }}
       - run: lein deps
-      - save_cache: # generate and store cache in the .m2 directory using a key template
+      -  save_cache:
+           paths:
+             - ~/.m2
+           key: deps-{{ checksum "project.clj" }}
+
+  build:
+    docker:
+      - image: circleci/clojure:lein-2.9.1
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - restore_cache:
+          key: deps-{{ checksum "project.clj" }}
+      - run:
+          working_directory: ~
+          command: |
+            curl -L --output ~/sass.tar.gz https://github.com/sass/dart-sass/releases/download/1.25.0/dart-sass-1.25.0-linux-x64.tar.gz
+            mkdir -p ~/sass
+            tar -xzvf ~/sass.tar.gz -C ~/sass
+      - run: |
+          export PATH=$PATH:/home/circleci/sass/dart-sass
+          lein run
+      - run:
+          name: Compress Artifacts
+          command: tar -cvf ~/compiled-html.tar ~/project/public/
+      - run:
+          name: Move compiled output
+          working_directory: ~
+          command: |
+            mkdir -p ~/gh-pages
+            mv ~/project/public/* ~/gh-pages/
+      - store_artifacts:
+          path: ~/compiled-html.tar
+          destination: compiled-html
+      - persist_to_workspace:
+          root: ~/
           paths:
-            - ~/.m2
-          key: lisp-nyc-{{ checksum "project.clj" }}
-      - run: lein do test, uberjar
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
-          path: target/uberjar/lisp-nyc.jar
-          destination: uberjar
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples 
+            - project
+            - gh-pages
+
+  publish:
+    docker:
+      - image: circleci/python:rc
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Configure git
+          command: |
+            git config user.email "jeffp42ker@gmail.com"
+            git config user.name  "CircleCI"
+      - run: |
+          git checkout -B master origin/master
+          git clean -fd
+          git rm -rf .
+          mv ~/gh-pages/* ~/project
+          git add .
+          git commit --allow-empty -m "CircleCI commit [ci skip]"
+          git push --quiet https://${GITHUB_TOKEN}@github.com/jeffp42ker/lisp.nyc.git master
+
+workflows:
+  prepare:
+    jobs:
+      - prepare-lein:
+          filters:
+            branches:
+              only: develop
+      - build:
+          requires:
+            - prepare-lein
+          filters:
+            branches:
+              only: develop
+      - publish:
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop
