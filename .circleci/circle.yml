@@ -1,4 +1,4 @@
-version: 1
+version: 2.1
 # Adapted from https://github.com/danplisetsky/danplisetsky.github.io/blob/develop/.circleci/config.yml
 jobs:
   prepare-lein:
