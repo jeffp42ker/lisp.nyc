@@ -1,42 +1,91 @@
-# Clojure CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-clojure/ for more details
-#
-version: 2
+version: 2.1
+# Adapted from https://github.com/danplisetsky/danplisetsky.github.io/blob/develop/.circleci/config.yml
 jobs:
+  prepare-lein:
+    docker:
+      - image: circleci/clojure:lein-2.9.1
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - restore_cache:
+          key: deps-{{ checksum "project.clj" }}
+      - run: lein deps
+      -  save_cache:
+           paths:
+             - ~/.m2
+           key: deps-{{ checksum "project.clj" }}
+
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/clojure:lein-2.7.1
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    working_directory: ~/repo
-
-    environment:
-      LEIN_ROOT: "true"
-      # Customize the JVM maximum heap limit
-      JVM_OPTS: -Xmx3200m
-
+      - image: circleci/clojure:lein-2.9.1
     steps:
-      - checkout
-
-      # Download and cache dependencies
+      - attach_workspace:
+          at: ~/project
       - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "project.clj" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run: lein deps
-
-      - save_cache:
+          key: deps-{{ checksum "project.clj" }}
+      - run:
+          working_directory: ~
+          command: |
+            curl -L --output ~/sass.tar.gz https://github.com/sass/dart-sass/releases/download/1.25.0/dart-sass-1.25.0-linux-x64.tar.gz
+            mkdir -p ~/sass
+            tar -xzvf ~/sass.tar.gz -C ~/sass
+      - run: |
+          export PATH=$PATH:/home/circleci/sass/dart-sass
+          lein run
+      - run:
+          name: Compress Artifacts
+          command: tar -cvf ~/compiled-html.tar ~/project/public/
+      - run:
+          name: Move compiled output
+          working_directory: ~
+          command: |
+            mkdir -p ~/gh-pages
+            mv ~/project/public/* ~/gh-pages/
+      - store_artifacts:
+          path: ~/compiled-html.tar
+          destination: compiled-html
+      - persist_to_workspace:
+          root: ~/
           paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "project.clj" }}
+            - project
+            - gh-pages
 
-      # run tests!
-      - run: lein test
+  publish:
+    docker:
+      - image: circleci/python:rc
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Configure git
+          command: |
+            git config user.email "jeffp42ker@gmail.com"
+            git config user.name  "CircleCI"
+      - run: |
+          git checkout -B master origin/master
+          git clean -fd
+          git rm -rf .
+          mv ~/gh-pages/* ~/project
+          git add .
+          git commit --allow-empty -m "CircleCI commit [ci skip]"
+          git push --quiet https://${GITHUB_TOKEN}@github.com/jeffp42ker/lisp.nyc.git master
+
+workflows:
+  prepare:
+    jobs:
+      - prepare-lein:
+          filters:
+            branches:
+              only: develop
+      - build:
+          requires:
+            - prepare-lein
+          filters:
+            branches:
+              only: develop
+      - publish:
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop
