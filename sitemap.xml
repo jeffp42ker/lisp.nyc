@@ -2,7 +2,7 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url>
 <loc>
-https://jeffp42ker.github.io/lisp.nyc/tags-output/not fetch/index.html
+https://jeffp42ker.github.io/lisp.nyc/tags-output/very fetch/index.html
 </loc>
 <lastmod>
 2021-01-17
@@ -10,7 +10,7 @@ https://jeffp42ker.github.io/lisp.nyc/tags-output/not fetch/index.html
 </url>
 <url>
 <loc>
-https://jeffp42ker.github.io/lisp.nyc/tags-output/very fetch/index.html
+https://jeffp42ker.github.io/lisp.nyc/tags-output/not fetch/index.html
 </loc>
 <lastmod>
 2021-01-17
@@ -26,7 +26,31 @@ https://jeffp42ker.github.io/lisp.nyc/tags-output/cryogen/index.html
 </url>
 <url>
 <loc>
+https://jeffp42ker.github.io/lisp.nyc/authors-output/Bob Bobbert/index.html
+</loc>
+<lastmod>
+2021-01-17
+</lastmod>
+</url>
+<url>
+<loc>
 https://jeffp42ker.github.io/lisp.nyc/archives/index.html
+</loc>
+<lastmod>
+2021-01-17
+</lastmod>
+</url>
+<url>
+<loc>
+https://jeffp42ker.github.io/lisp.nyc/index.html
+</loc>
+<lastmod>
+2021-01-17
+</lastmod>
+</url>
+<url>
+<loc>
+https://jeffp42ker.github.io/lisp.nyc/404.html
 </loc>
 <lastmod>
 2021-01-17
@@ -50,6 +74,14 @@ https://jeffp42ker.github.io/lisp.nyc/pages-output/another-page/index.html
 </url>
 <url>
 <loc>
+https://jeffp42ker.github.io/lisp.nyc/posts-output/2014-11-04-second-post/index.html
+</loc>
+<lastmod>
+2021-01-17
+</lastmod>
+</url>
+<url>
+<loc>
 https://jeffp42ker.github.io/lisp.nyc/posts-output/2014-03-10-first-post/index.html
 </loc>
 <lastmod>
@@ -66,39 +98,7 @@ https://jeffp42ker.github.io/lisp.nyc/posts-output/2020-12-03-docs/index.html
 </url>
 <url>
 <loc>
-https://jeffp42ker.github.io/lisp.nyc/posts-output/2014-11-04-second-post/index.html
-</loc>
-<lastmod>
-2021-01-17
-</lastmod>
-</url>
-<url>
-<loc>
 https://jeffp42ker.github.io/lisp.nyc/tags/index.html
-</loc>
-<lastmod>
-2021-01-17
-</lastmod>
-</url>
-<url>
-<loc>
-https://jeffp42ker.github.io/lisp.nyc/authors-output/Bob Bobbert/index.html
-</loc>
-<lastmod>
-2021-01-17
-</lastmod>
-</url>
-<url>
-<loc>
-https://jeffp42ker.github.io/lisp.nyc/404.html
-</loc>
-<lastmod>
-2021-01-17
-</lastmod>
-</url>
-<url>
-<loc>
-https://jeffp42ker.github.io/lisp.nyc/index.html
 </loc>
 <lastmod>
 2021-01-17
