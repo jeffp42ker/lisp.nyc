@@ -2,6 +2,14 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url>
 <loc>
+https://jeffp42ker.github.io/lisp.nyc/404.html
+</loc>
+<lastmod>
+2021-01-18
+</lastmod>
+</url>
+<url>
+<loc>
 https://jeffp42ker.github.io/lisp.nyc/index.html
 </loc>
 <lastmod>
@@ -18,22 +26,6 @@ https://jeffp42ker.github.io/lisp.nyc/archives/index.html
 </url>
 <url>
 <loc>
-https://jeffp42ker.github.io/lisp.nyc/404.html
-</loc>
-<lastmod>
-2021-01-18
-</lastmod>
-</url>
-<url>
-<loc>
-https://jeffp42ker.github.io/lisp.nyc/authors-output/Bob Bobbert/index.html
-</loc>
-<lastmod>
-2021-01-18
-</lastmod>
-</url>
-<url>
-<loc>
 https://jeffp42ker.github.io/lisp.nyc/tags/index.html
 </loc>
 <lastmod>
@@ -42,15 +34,7 @@ https://jeffp42ker.github.io/lisp.nyc/tags/index.html
 </url>
 <url>
 <loc>
-https://jeffp42ker.github.io/lisp.nyc/pages-output/another-page/index.html
-</loc>
-<lastmod>
-2021-01-18
-</lastmod>
-</url>
-<url>
-<loc>
-https://jeffp42ker.github.io/lisp.nyc/pages-output/about/index.html
+https://jeffp42ker.github.io/lisp.nyc/tags-output/not fetch/index.html
 </loc>
 <lastmod>
 2021-01-18
@@ -59,14 +43,6 @@ https://jeffp42ker.github.io/lisp.nyc/pages-output/about/index.html
 <url>
 <loc>
 https://jeffp42ker.github.io/lisp.nyc/tags-output/cryogen/index.html
-</loc>
-<lastmod>
-2021-01-18
-</lastmod>
-</url>
-<url>
-<loc>
-https://jeffp42ker.github.io/lisp.nyc/tags-output/not fetch/index.html
 </loc>
 <lastmod>
 2021-01-18
@@ -99,6 +75,30 @@ https://jeffp42ker.github.io/lisp.nyc/posts-output/2014-11-04-second-post/index.
 <url>
 <loc>
 https://jeffp42ker.github.io/lisp.nyc/posts-output/2014-03-10-first-post/index.html
+</loc>
+<lastmod>
+2021-01-18
+</lastmod>
+</url>
+<url>
+<loc>
+https://jeffp42ker.github.io/lisp.nyc/pages-output/another-page/index.html
+</loc>
+<lastmod>
+2021-01-18
+</lastmod>
+</url>
+<url>
+<loc>
+https://jeffp42ker.github.io/lisp.nyc/pages-output/about/index.html
+</loc>
+<lastmod>
+2021-01-18
+</lastmod>
+</url>
+<url>
+<loc>
+https://jeffp42ker.github.io/lisp.nyc/authors-output/Bob Bobbert/index.html
 </loc>
 <lastmod>
 2021-01-18
