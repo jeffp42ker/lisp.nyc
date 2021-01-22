@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8">
-    <title>{{title}}{% block subtitle %}{% endblock %}</title>
+    <title>{{description}}{% block subtitle %}{% endblock %}</title>
     {% block meta %}
     <meta name="description" content="{{description}}">
     <meta name="keywords" content="">
@@ -14,42 +14,62 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link rel="shortcut icon" href="{{site-url|add:"/img/favicon.ico"}}">
     <link href="{{site-url|add:"/css/screen.css"}}" rel="stylesheet" type="text/css">
+    <link href="{{site-url|add:"/css/lispnyc.css"}}" rel="stylesheet" type="text/css">
+    <link href="{{site-url|add:"/css/foundation.css"}}" rel="stylesheet" type="text/css">
+    <link href="{{site-url|add:"/css/foundation-lispnyc.css"}}" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            background-image: url("{{site-url|add:"/img/nyc-skyline.jpg"}}");
+            background-color: #e6e6e6;
+        }
+    </style>
+    <script src="{{site-url|add:"/js/vendor/modernizr.js"}}"></script>
 </head>
 <body>
 
+<!-- top bar -->
+<nav class="top-bar" data-topbar>
+    <ul class="title-area">
+        <li class="name">
+            <h1><a href="/"><img class="title" src="{{site-url|add:"/img/lispnyc-logo-light.gif"}}">{{title}}</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+    </ul>
 
-<nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{site-url}}{{index-uri}}">{{title}}</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li {% if home %} class="active" {% endif %}><a href="{{site-url}}{{index-uri}}">Home</a></li>
-                <li
-                {% if archives %} class="active" {% endif %}><a href="{{site-url}}{{archives-uri}}">Archives</a></li>
-                {% for nav-page in navbar-pages %}
-                <li
-                {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
+    <section class="top-bar-section">
+        <ul class="right">
+            <li><a href="https://www.meetup.com/LispNYC/">meetings</a></li>
+            <li class="has-dropdown">
+                <a>resources</a>
+                <ul class="dropdown">
+                    <li><a href="http://lisp.nyc/news">news stream</a></li>
+                    <li><a href="http://lisp.nyc/learning-lisp">learning lisp</a></li>
+                    <li><a href="http://lisp.nyc/watchfaces">smartwatch faces</a></li>
+                    <li><a href="http://LispInSummerProjects.org">Lisp in Summer Projects</a></li>
+                </ul>
+            </li>
+            <li {% if home %} class="active" {% endif %}><a href="{{site-url}}{{index-uri}}">
+                home</a></li>
+            <li
+                    {% if archives %} class="active" {% endif %}><a href="{{site-url}}{{archives-uri}}">
+                archives</a></li>
+            {% for nav-page in navbar-pages %}
+            <li
+                    {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
                 <a href="{{site-url}}{{nav-page.uri}}">{{nav-page.title}}</a>
-                </li>
-                {% endfor %}
-                <li><a href="{{site-url}}{{rss-uri}}">RSS</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div><!--/.container-fluid -->
+            </li>
+            {% endfor %}
+            <li><a href="{{site-url}}{{rss-uri}}">RSS</a></li>
+        </ul>
+    </section>
 </nav>
+<!-- top bar -->
+
 
 
 <div class="container">
-
 
     <div class="row">
         <div class="col-lg-9">
@@ -58,48 +78,15 @@
                 {% endblock %}
             </div>
         </div>
-
-        <div class="col-md-3">
-            <div id="sidebar">
-                <h3>Links</h3>
-                <ul id="links">
-                    <li><a href="http://cryogenweb.org/docs/home.html">Cryogen Docs</a></li>
-                    <li><a href="https://carmen.la/blog/archives/">Carmen's Blog</a></li>
-                    {% for page in sidebar-pages %}
-                    <li><a href="{{site-url}}{{page.uri}}">{{page.title}}</a></li>
-                    {% endfor %}
-                </ul>
-                {% if latest-posts|not-empty %}
-                <div id="recent">
-                    <h3>Recent Posts</h3>
-                    <ul>
-                        {% for post in latest-posts %}
-                        <li><a href="{{site-url}}{{post.uri}}">{{post.title}}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endif %}
-                {% if tags|not-empty %}
-                <div id="tags">
-                    <h3>Tags</h3>
-                    <ul>
-                        {% for tag in tags %}
-                        <li><a href="{{site-url}}{{tag.uri}}">{{tag.name}}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endif %}
-            </div>
-        </div>
     </div>
-    <footer>Copyright &copy; {{today|date:yyyy}} {{author}}
-        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
 </div>
+{% include "/html/footer.html" %}
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 {% script "js/highlight.pack.js" %}
 <script>hljs.initHighlightingOnLoad();</script>
 {% if post.klipse %} {{post.klipse|safe}} {% endif %}
 {% if page.klipse %} {{page.klipse|safe}} {% endif %}
+{% include "/html/foundation-scripts.html" %}
 </body>
 </html>

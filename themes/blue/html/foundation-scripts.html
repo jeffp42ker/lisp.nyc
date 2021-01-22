@@ -1,0 +1,18 @@
+<!-- foundation -->
+<script>
+    document.write('<script src=/static/js/vendor/' +
+        ('__proto__' in {} ? 'zepto' : 'jquery') +
+        '.js><\/script>')
+</script>
+<script src="{{site-url|add:"/js/foundation/foundation.js"}}"></script>
+<script src="{{site-url|add:"/js/foundation/foundation.topbar.js"}}"></script>
+<script src="{{site-url|add:"/js/foundation/foundation.dropdown.js"}}"></script>
+<script>
+    $(document).foundation();
+</script>
+
+<!-- google analytics -->
+<script type="text/javascript">
+    var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-20563213-1']); _gaq.push(['_trackPageview']);
+    (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+</script>

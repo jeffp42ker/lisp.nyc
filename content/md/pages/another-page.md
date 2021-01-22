@@ -1,4 +1,4 @@
-{:title "Another Page"
+{:title "another Page"
  :layout :page
  :page-index 1}
 
