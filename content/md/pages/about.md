@@ -1,4 +1,4 @@
-{:title "about"
+{:title "{ about }"
  :layout :page
  :page-index 0
  :navbar? true}
@@ -18,7 +18,7 @@ We promote education, outreach and software development. We have been involved i
 
 # Legal
 
-LispNYC is a unincorporated nonprofit voluntary association. We are registered with the New York State Office of the Attorney General as a [charitable organization](http://www.charitiesnys.com/RegistrySearch/show_details.jsp?id={75FF0F8B-A12E-470E-9A2F-5E04F6C9E4E8}).
+LispNYC is an unincorporated nonprofit voluntary association. We are registered with the New York State Office of the Attorney General as a [charitable organization](http://www.charitiesnys.com/RegistrySearch/show_details.jsp?id={75FF0F8B-A12E-470E-9A2F-5E04F6C9E4E8}).
 
     LISPNYC
     PO BOX 425

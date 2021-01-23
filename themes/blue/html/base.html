@@ -40,9 +40,9 @@
 
     <section class="top-bar-section">
         <ul class="right">
-            <li><a href="https://www.meetup.com/LispNYC/">meetings</a></li>
+            <li><a href="https://www.meetup.com/LispNYC/">( meetings )</a></li>
             <li class="has-dropdown">
-                <a>resources</a>
+                <a>{ resources }</a>
                 <ul class="dropdown">
                     <li><a href="http://lisp.nyc/news">news stream</a></li>
                     <li><a href="http://lisp.nyc/learning-lisp">learning lisp</a></li>
@@ -51,10 +51,10 @@
                 </ul>
             </li>
             <li {% if home %} class="active" {% endif %}><a href="{{site-url}}{{index-uri}}">
-                home</a></li>
+                :home</a></li>
             <li
                     {% if archives %} class="active" {% endif %}><a href="{{site-url}}{{archives-uri}}">
-                archives</a></li>
+                [ archives ]</a></li>
             {% for nav-page in navbar-pages %}
             <li
                     {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
@@ -76,6 +76,39 @@
             <div id="content">
                 {% block content %}
                 {% endblock %}
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>Links</h3>
+                <ul id="links">
+                    <li><a href="http://cryogenweb.org/docs/home.html">Cryogen Docs</a></li>
+                    <li><a href="https://carmen.la/blog/archives/">Carmen's Blog</a></li>
+                    {% for page in sidebar-pages %}
+                    <li><a href="{{site-url}}{{page.uri}}">{{page.title}}</a></li>
+                    {% endfor %}
+                </ul>
+                {% if latest-posts|not-empty %}
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        {% for post in latest-posts %}
+                        <li><a href="{{site-url}}{{post.uri}}">{{post.title}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% if tags|not-empty %}
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        {% for tag in tags %}
+                        <li><a href="{{site-url}}{{tag.uri}}">{{tag.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
